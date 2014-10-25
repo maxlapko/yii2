@@ -128,7 +128,7 @@ yii = (function ($) {
                 $form = $e.closest('form'),
                 action = $e.attr('href');
 
-            if (method === undefined) {
+            if ($e.is('a') && method === undefined) {
                 if (action && action != '#') {
                     window.location = action;
                 }
@@ -165,7 +165,9 @@ yii = (function ($) {
             }
 
             var oldMethod = $form.prop('method');
-            $form.prop('method', method);
+            if (method !== undefined) {
+                $form.prop('method', method);    
+            }
 
             $form.trigger('submit');
 
